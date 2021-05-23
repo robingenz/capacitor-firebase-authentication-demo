@@ -35,7 +35,7 @@ export class AuthService {
   }
 
   public async isAuthenticated(): Promise<boolean> {
-    const session = this.storageService.retrieveData<SignInResult>(StorageKey.session);
+    const session = await this.storageService.retrieveData<SignInResult>(StorageKey.session);
     if (session) {
       return true;
     }
