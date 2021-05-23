@@ -24,7 +24,7 @@
     "@capacitor/core": "^2.4.7",
     "@capacitor/ios": "^2.4.7",
     "@ionic/angular": "^5.5.2",
-    "@robingenz/capacitor-firebase-authentication": "*",
+    "@robingenz/capacitor-firebase-authentication": "^0.0.1-dev.1621782161",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
