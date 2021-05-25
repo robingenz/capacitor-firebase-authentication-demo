@@ -14,17 +14,15 @@ const FirebaseAuthentication: FirebaseAuthenticationPlugin =
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const Storage: StoragePlugin = Plugins.Storage as StoragePlugin;
 
-const LOG_TAG = '[AuthService]';
-
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private readonly storageService: StorageService) {}
+  constructor(private readonly storageService: StorageService) { }
 
   public async signInWithGoogle(): Promise<void> {
     const result = await FirebaseAuthentication.signIn({
-      provider: SignInProvider.GOOGLE,
+      provider: SignInProvider.Google,
     });
     this.storageService.storeData(StorageKey.session, result);
   }
