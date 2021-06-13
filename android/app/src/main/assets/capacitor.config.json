@@ -1,13 +1,6 @@
 {
-  "appId": "dev.robingenz.capacitor.firebaseauth.demo",
-  "appName": "capacitor-firebase-authentication-demo",
-  "bundledWebRuntime": false,
-  "npmClient": "npm",
-  "webDir": "www",
-  "plugins": {
-    "SplashScreen": {
-      "launchShowDuration": 0
-    }
-  },
-  "cordova": {}
+	"appId": "io.ionic.starter",
+	"appName": "capacitor-firebase-authentication-demo",
+	"webDir": "www",
+	"bundledWebRuntime": false
 }
