@@ -10,5 +10,9 @@
 	{
 		"pkg": "@capacitor/keyboard",
 		"classpath": "com.capacitorjs.plugins.keyboard.KeyboardPlugin"
+	},
+	{
+		"pkg": "@robingenz/capacitor-firebase-authentication",
+		"classpath": "dev.robingenz.capacitorjs.plugins.firebase.auth.FirebaseAuthenticationPlugin"
 	}
 ]
