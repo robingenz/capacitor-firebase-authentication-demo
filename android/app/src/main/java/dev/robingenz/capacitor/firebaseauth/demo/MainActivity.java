@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package dev.robingenz.capacitor.firebaseauth.demo;
 
 import com.getcapacitor.BridgeActivity;
 
