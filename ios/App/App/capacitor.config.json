@@ -1,1 +1,6 @@
-{}
+{
+	"appId": "dev.robingenz.capacitor.firebaseauth.demo",
+	"appName": "capacitor-firebase-authentication-demo",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
