@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {
   FirebaseAuthentication,
+  GetIdTokenOptions,
   User,
 } from '@robingenz/capacitor-firebase-authentication';
 
@@ -31,8 +32,8 @@ export class FirebaseAuthenticationService {
     return result.user;
   }
 
-  public async getIdToken(): Promise<string> {
-    const result = await FirebaseAuthentication.getIdToken();
+  public async getIdToken(options?: GetIdTokenOptions): Promise<string> {
+    const result = await FirebaseAuthentication.getIdToken(options);
     return result.token;
   }
 }

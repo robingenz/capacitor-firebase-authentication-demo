@@ -10,6 +10,7 @@ import { User } from '@robingenz/capacitor-firebase-authentication';
 })
 export class HomePage implements OnInit {
   public currentUser: User |null = null;
+  public idToken = '';
 
   constructor(
     private readonly firebaseAuthenticationService: FirebaseAuthenticationService,
@@ -21,6 +22,9 @@ export class HomePage implements OnInit {
     this.firebaseAuthenticationService.getCurrentUser().then(user => {
       this.currentUser = user;
     });
+    this.firebaseAuthenticationService.getIdToken().then(idToken => {
+      this.idToken = idToken;
+    });
   }
 
   public async signOut(): Promise<void> {
@@ -28,6 +32,15 @@ export class HomePage implements OnInit {
     try {
       await this.firebaseAuthenticationService.signOut();
       await this.navigateToLogin();
+    } finally {
+      await loadingElement.dismiss();
+    }
+  }
+
+  public async refreshIdToken(): Promise<void> {
+    const loadingElement = await this.dialogService.showLoading();
+    try {
+      this.idToken = await this.firebaseAuthenticationService.getIdToken({ forceRefresh: true });
     } finally {
       await loadingElement.dismiss();
     }

@@ -45,6 +45,11 @@
         <ion-label position="stacked">Tenant ID</ion-label>
         <ion-input [value]="currentUser.tenantId" readonly></ion-input>
       </ion-item>
+      <ion-item>
+        <ion-label position="stacked">ID Token</ion-label>
+        <ion-input [value]="idToken" readonly></ion-input>
+      </ion-item>
+      <ion-button expand="block" (click)="refreshIdToken()">Refresh ID Token</ion-button>
       <ion-button expand="block" (click)="signOut()">Logout</ion-button>
     </ion-card-content>
   </ion-card>
