@@ -31,7 +31,7 @@ export class HomePage implements OnInit {
     const loadingElement = await this.dialogService.showLoading();
     try {
       await this.firebaseAuthenticationService.signOut();
-      await this.navigateToLogin();
+      await this.navigateToLoginPage();
     } finally {
       await loadingElement.dismiss();
     }
@@ -46,7 +46,7 @@ export class HomePage implements OnInit {
     }
   }
 
-  private async navigateToLogin(): Promise<void> {
+  private async navigateToLoginPage(): Promise<void> {
     await this.router.navigate(['/login'], { replaceUrl: true });
   }
 }
