@@ -1,4 +1,8 @@
 import { Injectable } from '@angular/core';
+import {
+  FirebaseAuthentication,
+  User,
+} from '@robingenz/capacitor-firebase-authentication';
 
 @Injectable({
   providedIn: 'root',
@@ -7,26 +11,28 @@ export class FirebaseAuthenticationService {
   constructor() {}
 
   public async signInWithApple(): Promise<void> {
-    throw new Error('Not implemented');
+    await FirebaseAuthentication.signInWithApple();
   }
 
   public async signInWithGoogle(): Promise<void> {
-    throw new Error('Not implemented');
+    await FirebaseAuthentication.signInWithGoogle();
   }
 
   public async signInWithMicrosoft(): Promise<void> {
-    throw new Error('Not implemented');
+    await FirebaseAuthentication.signInWithMicrosoft();
   }
 
   public async signOut(): Promise<void> {
-    throw new Error('Not implemented');
+    await FirebaseAuthentication.signOut();
   }
 
-  public async getCurrentUser(): Promise<any> {
-    throw new Error('Not implemented');
+  public async getCurrentUser(): Promise<User | null> {
+    const result = await FirebaseAuthentication.getCurrentUser();
+    return result.user;
   }
 
-  public async getIdToken(): Promise<any> {
-    throw new Error('Not implemented');
+  public async getIdToken(): Promise<string> {
+    const result = await FirebaseAuthentication.getIdToken();
+    return result.token;
   }
 }
