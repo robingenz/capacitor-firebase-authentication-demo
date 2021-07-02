@@ -18,12 +18,24 @@ export class LoginPage {
     await this.signInWith(SignInProvider.apple);
   }
 
+  public async signInWithGithub(): Promise<void> {
+    await this.signInWith(SignInProvider.github);
+  }
+
   public async signInWithGoogle(): Promise<void> {
     await this.signInWith(SignInProvider.google);
   }
 
   public async signInWithMicrosoft(): Promise<void> {
     await this.signInWith(SignInProvider.microsoft);
+  }
+
+  public async signInWithTwitter(): Promise<void> {
+    await this.signInWith(SignInProvider.twitter);
+  }
+
+  public async signInWithYahoo(): Promise<void> {
+    await this.signInWith(SignInProvider.yahoo);
   }
 
   private async signInWith(signInProvider: SignInProvider): Promise<void> {
@@ -33,11 +45,20 @@ export class LoginPage {
         case SignInProvider.apple:
           await this.firebaseAuthenticationService.signInWithApple();
           break;
+        case SignInProvider.github:
+          await this.firebaseAuthenticationService.signInWithGithub();
+          break;
         case SignInProvider.google:
           await this.firebaseAuthenticationService.signInWithGoogle();
           break;
         case SignInProvider.microsoft:
           await this.firebaseAuthenticationService.signInWithMicrosoft();
+          break;
+        case SignInProvider.twitter:
+          await this.firebaseAuthenticationService.signInWithTwitter();
+          break;
+        case SignInProvider.yahoo:
+          await this.firebaseAuthenticationService.signInWithYahoo();
           break;
       }
       await this.navigateToHome();
@@ -55,6 +76,9 @@ export class LoginPage {
 
 enum SignInProvider {
   apple = 'apple',
+  github = 'github',
   google = 'google',
   microsoft = 'microsoft',
+  twitter = 'twitter',
+  yahoo = 'yahoo',
 }

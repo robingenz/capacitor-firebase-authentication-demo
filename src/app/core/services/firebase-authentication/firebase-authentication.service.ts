@@ -15,12 +15,24 @@ export class FirebaseAuthenticationService {
     await FirebaseAuthentication.signInWithApple();
   }
 
+  public async signInWithGithub(): Promise<void> {
+    await FirebaseAuthentication.signInWithGithub();
+  }
+
   public async signInWithGoogle(): Promise<void> {
     await FirebaseAuthentication.signInWithGoogle();
   }
 
   public async signInWithMicrosoft(): Promise<void> {
     await FirebaseAuthentication.signInWithMicrosoft();
+  }
+
+  public async signInWithTwitter(): Promise<void> {
+    await FirebaseAuthentication.signInWithTwitter();
+  }
+
+  public async signInWithYahoo(): Promise<void> {
+    await FirebaseAuthentication.signInWithYahoo();
   }
 
   public async signOut(): Promise<void> {
