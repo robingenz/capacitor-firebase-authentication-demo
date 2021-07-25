@@ -11,6 +11,7 @@ import { User } from '@robingenz/capacitor-firebase-authentication';
 export class HomePage implements OnInit {
   public currentUser: User |null = null;
   public idToken = '';
+  public languageCode = '';
 
   constructor(
     private readonly firebaseAuthenticationService: FirebaseAuthenticationService,
@@ -44,6 +45,14 @@ export class HomePage implements OnInit {
     } finally {
       await loadingElement.dismiss();
     }
+  }
+
+  public async setLanguageCode(languageCode: string): Promise<void> {
+    await this.firebaseAuthenticationService.setLanguageCode(languageCode);
+  }
+
+  public async useAppLanguage(): Promise<void> {
+    await this.firebaseAuthenticationService.useAppLanguage();
   }
 
   private async navigateToLoginPage(): Promise<void> {

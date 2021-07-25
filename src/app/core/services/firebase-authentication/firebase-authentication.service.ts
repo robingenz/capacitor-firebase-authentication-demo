@@ -11,6 +11,20 @@ import {
 export class FirebaseAuthenticationService {
   constructor() {}
 
+  public async getCurrentUser(): Promise<User | null> {
+    const result = await FirebaseAuthentication.getCurrentUser();
+    return result.user;
+  }
+
+  public async getIdToken(options?: GetIdTokenOptions): Promise<string> {
+    const result = await FirebaseAuthentication.getIdToken(options);
+    return result.token;
+  }
+
+  public async setLanguageCode(languageCode: string): Promise<void> {
+    await FirebaseAuthentication.setLanguageCode({ languageCode });
+  }
+
   public async signInWithApple(): Promise<void> {
     await FirebaseAuthentication.signInWithApple();
   }
@@ -39,13 +53,7 @@ export class FirebaseAuthenticationService {
     await FirebaseAuthentication.signOut();
   }
 
-  public async getCurrentUser(): Promise<User | null> {
-    const result = await FirebaseAuthentication.getCurrentUser();
-    return result.user;
-  }
-
-  public async getIdToken(options?: GetIdTokenOptions): Promise<string> {
-    const result = await FirebaseAuthentication.getIdToken(options);
-    return result.token;
+  public async useAppLanguage(): Promise<void> {
+    await FirebaseAuthentication.useAppLanguage();
   }
 }

@@ -8,6 +8,9 @@
 
 <ion-content class="ion-padding">
   <ion-card>
+    <ion-card-header>
+      <ion-card-title>User Info</ion-card-title>
+    </ion-card-header>
     <ion-card-content *ngIf="currentUser">
       <ion-item>
         <ion-label position="stacked">UID</ion-label>
@@ -51,6 +54,19 @@
       </ion-item>
       <ion-button expand="block" (click)="refreshIdToken()">Refresh ID Token</ion-button>
       <ion-button expand="block" (click)="signOut()">Logout</ion-button>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Configuration</ion-card-title>
+    </ion-card-header>
+    <ion-card-content *ngIf="currentUser">
+      <ion-item>
+        <ion-label position="stacked">Language</ion-label>
+        <ion-input [(ngModel)]="languageCode" placeholder="en-US"></ion-input>
+      </ion-item>
+      <ion-button expand="block" (click)="setLanguageCode(languageCode)">Set Language Code</ion-button>
+      <ion-button expand="block" (click)="useAppLanguage()">Use App Language</ion-button>
     </ion-card-content>
   </ion-card>
 </ion-content>
