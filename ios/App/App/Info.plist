@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-        <string>capacitor-firebase-authentication-demo</string>
+	<string>capacitor-firebase-authentication-demo</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -50,5 +50,22 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb1501423050210862</string>
+			</array>
+		</dict>
+	</array>
+	<key>FacebookAppID</key>
+	<string>1501423050210862</string>
+	<key>FacebookClientToken</key>
+	<string>4e97381e374eee0cabc670909b728687</string>
+	<key>FacebookDisplayName</key>
+	<string>Capacitor Firebase Auth Demo</string>
+	<key>FacebookAutoLogAppEventsEnabled</key>
+	<false/>
 </dict>
 </plist>
