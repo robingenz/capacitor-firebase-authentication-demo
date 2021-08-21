@@ -18,6 +18,10 @@ export class LoginPage {
     await this.signInWith(SignInProvider.apple);
   }
 
+  public async signInWithFacebook(): Promise<void> {
+    await this.signInWith(SignInProvider.facebook);
+  }
+
   public async signInWithGithub(): Promise<void> {
     await this.signInWith(SignInProvider.github);
   }
@@ -44,6 +48,9 @@ export class LoginPage {
       switch (signInProvider) {
         case SignInProvider.apple:
           await this.firebaseAuthenticationService.signInWithApple();
+          break;
+        case SignInProvider.facebook:
+          await this.firebaseAuthenticationService.signInWithFacebook();
           break;
         case SignInProvider.github:
           await this.firebaseAuthenticationService.signInWithGithub();
@@ -76,6 +83,7 @@ export class LoginPage {
 
 enum SignInProvider {
   apple = 'apple',
+  facebook = 'facebook',
   github = 'github',
   google = 'google',
   microsoft = 'microsoft',
