@@ -29,6 +29,10 @@ export class FirebaseAuthenticationService {
     await FirebaseAuthentication.signInWithApple();
   }
 
+  public async signInWithFacebook(): Promise<void> {
+    await FirebaseAuthentication.signInWithFacebook();
+  }
+
   public async signInWithGithub(): Promise<void> {
     await FirebaseAuthentication.signInWithGithub();
   }

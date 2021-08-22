@@ -4,4 +4,6 @@
     <string name="title_activity_main">capacitor-firebase-authentication-demo</string>
     <string name="package_name">dev.robingenz.capacitor.firebaseauth.demo</string>
     <string name="custom_url_scheme">dev.robingenz.capacitor.firebaseauth.demo</string>
+    <string name="facebook_app_id">1501423050210862</string>
+    <string name="fb_login_protocol_scheme">fb1501423050210862</string>
 </resources>
