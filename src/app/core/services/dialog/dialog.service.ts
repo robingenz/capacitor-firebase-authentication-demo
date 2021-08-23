@@ -40,6 +40,32 @@ export class DialogService {
     return this.showAlert(opts);
   }
 
+  public async showInputAlert(opts?: AlertOptions): Promise<any> {
+    const promise = new Promise((resolve, reject) => {
+      const defaultOpts: AlertOptions = {
+        header: 'Input',
+        inputs: [],
+        buttons: [
+          {
+            text: 'Cancel',
+            handler: (data) => {
+              resolve(data);
+            },
+          },
+          {
+            text: 'Submit',
+            handler: (data) => {
+              resolve(data);
+            },
+          },
+        ],
+      };
+      opts = { ...defaultOpts, ...opts };
+      this.showAlert(opts);
+    });
+    return promise;
+  }
+
   public async showModal(opts: ModalOptions): Promise<HTMLIonModalElement> {
     const modal = await this.modalCtrl.create(opts);
     await modal.present();

@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import {
   FirebaseAuthentication,
   GetIdTokenOptions,
+  SignInWithPhoneNumberOptions,
+  SignInWithPhoneNumberResult,
   User,
 } from '@robingenz/capacitor-firebase-authentication';
 
@@ -51,6 +53,10 @@ export class FirebaseAuthenticationService {
 
   public async signInWithYahoo(): Promise<void> {
     await FirebaseAuthentication.signInWithYahoo();
+  }
+
+  public async signInWithPhoneNumber(options: SignInWithPhoneNumberOptions): Promise<SignInWithPhoneNumberResult> {
+    return FirebaseAuthentication.signInWithPhoneNumber(options);
   }
 
   public async signOut(): Promise<void> {

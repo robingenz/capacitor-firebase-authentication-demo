@@ -42,10 +42,14 @@ export class LoginPage {
     await this.signInWith(SignInProvider.yahoo);
   }
 
-  private async signInWith(signInProvider: SignInProvider): Promise<void> {
+  public async signInWithPhoneNumber(): Promise<void> {
+    await this.signInWith(SignInProvider.phone);
+  }
+
+  private async signInWith(provider: SignInProvider): Promise<void> {
     const loadingElement = await this.dialogService.showLoading();
     try {
-      switch (signInProvider) {
+      switch (provider) {
         case SignInProvider.apple:
           await this.firebaseAuthenticationService.signInWithApple();
           break;
@@ -67,6 +71,24 @@ export class LoginPage {
         case SignInProvider.yahoo:
           await this.firebaseAuthenticationService.signInWithYahoo();
           break;
+        case SignInProvider.phone:
+          const phoneNumber = await this.getPhoneNumber();
+          if (!phoneNumber) {
+            break;
+          }
+          const result =
+            await this.firebaseAuthenticationService.signInWithPhoneNumber({
+              phoneNumber,
+            });
+          const verificationCode = await this.getVerificationCode();
+          if (!verificationCode) {
+            break;
+          }
+          await this.firebaseAuthenticationService.signInWithPhoneNumber({
+            verificationId: result.verificationId,
+            verificationCode,
+          });
+          break;
       }
       await this.navigateToHome();
     } catch (error) {
@@ -79,6 +101,38 @@ export class LoginPage {
   private async navigateToHome(): Promise<void> {
     await this.router.navigate(['/home'], { replaceUrl: true });
   }
+
+  private async getPhoneNumber(): Promise<string | undefined> {
+    const data = await this.dialogService.showInputAlert({
+      inputs: [
+        {
+          name: 'phoneNumber',
+          type: 'text',
+          placeholder: 'Phone Number',
+        },
+      ],
+    });
+    if (!data) {
+      return;
+    }
+    return data.phoneNumber;
+  }
+
+  private async getVerificationCode(): Promise<string | undefined> {
+    const data = await this.dialogService.showInputAlert({
+      inputs: [
+        {
+          name: 'verificationCode',
+          type: 'text',
+          placeholder: 'Verification Code',
+        },
+      ],
+    });
+    if (!data) {
+      return;
+    }
+    return data.verificationCode;
+  }
 }
 
 enum SignInProvider {
@@ -89,4 +143,5 @@ enum SignInProvider {
   microsoft = 'microsoft',
   twitter = 'twitter',
   yahoo = 'yahoo',
+  phone = 'phone',
 }
