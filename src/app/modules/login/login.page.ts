@@ -43,7 +43,33 @@ export class LoginPage {
   }
 
   public async signInWithPhoneNumber(): Promise<void> {
-    await this.signInWith(SignInProvider.phone);
+    let loadingElement: HTMLIonLoadingElement | undefined;
+    try {
+      const phoneNumber = await this.getPhoneNumber();
+      if (!phoneNumber) {
+        return;
+      }
+      loadingElement = await this.dialogService.showLoading();
+      const { verificationId } =
+        await this.firebaseAuthenticationService.signInWithPhoneNumber({
+          phoneNumber,
+        });
+      await loadingElement.dismiss();
+      const verificationCode = await this.getVerificationCode();
+      if (!verificationCode) {
+        return;
+      }
+      loadingElement = await this.dialogService.showLoading();
+      await this.firebaseAuthenticationService.signInWithPhoneNumber({
+        verificationId,
+        verificationCode,
+      });
+      await this.navigateToHome();
+    } catch (error) {
+      await this.dialogService.showErrorAlert({ message: error });
+    } finally {
+      await loadingElement?.dismiss();
+    }
   }
 
   private async signInWith(provider: SignInProvider): Promise<void> {
@@ -70,24 +96,6 @@ export class LoginPage {
           break;
         case SignInProvider.yahoo:
           await this.firebaseAuthenticationService.signInWithYahoo();
-          break;
-        case SignInProvider.phone:
-          const phoneNumber = await this.getPhoneNumber();
-          if (!phoneNumber) {
-            break;
-          }
-          const result =
-            await this.firebaseAuthenticationService.signInWithPhoneNumber({
-              phoneNumber,
-            });
-          const verificationCode = await this.getVerificationCode();
-          if (!verificationCode) {
-            break;
-          }
-          await this.firebaseAuthenticationService.signInWithPhoneNumber({
-            verificationId: result.verificationId,
-            verificationCode,
-          });
           break;
       }
       await this.navigateToHome();
@@ -143,5 +151,4 @@ enum SignInProvider {
   microsoft = 'microsoft',
   twitter = 'twitter',
   yahoo = 'yahoo',
-  phone = 'phone',
 }
