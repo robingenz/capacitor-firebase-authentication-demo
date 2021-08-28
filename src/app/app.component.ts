@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FirebaseAuthenticationService } from './core';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
+  constructor(
+    private readonly firebaseAuthenticationService: FirebaseAuthenticationService
+  ) {
+    this.initializeApp();
+  }
+
+  private async initializeApp(): Promise<void> {
+    await this.firebaseAuthenticationService.initialize();
+  }
 }

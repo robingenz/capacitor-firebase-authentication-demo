@@ -9,7 +9,7 @@ import { User } from '@robingenz/capacitor-firebase-authentication';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-  public currentUser: User |null = null;
+  public currentUser: User | null = null;
   public idToken = '';
   public languageCode = '';
 
@@ -20,10 +20,10 @@ export class HomePage implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.firebaseAuthenticationService.getCurrentUser().then(user => {
+    this.firebaseAuthenticationService.getCurrentUser().then((user) => {
       this.currentUser = user;
     });
-    this.firebaseAuthenticationService.getIdToken().then(idToken => {
+    this.firebaseAuthenticationService.getIdToken().then((idToken) => {
       this.idToken = idToken;
     });
   }
@@ -41,7 +41,9 @@ export class HomePage implements OnInit {
   public async refreshIdToken(): Promise<void> {
     const loadingElement = await this.dialogService.showLoading();
     try {
-      this.idToken = await this.firebaseAuthenticationService.getIdToken({ forceRefresh: true });
+      this.idToken = await this.firebaseAuthenticationService.getIdToken({
+        forceRefresh: true,
+      });
     } finally {
       await loadingElement.dismiss();
     }
