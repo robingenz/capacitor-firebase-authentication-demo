@@ -26,7 +26,8 @@
     "@capacitor/ios": "3.2.0",
     "@capacitor/keyboard": "1.0.1",
     "@ionic/angular": "^5.5.2",
-    "@robingenz/capacitor-firebase-authentication": "0.3.6",
+    "@robingenz/capacitor-firebase-authentication": "0.3.8-dev.c71c1b9.1630173042",
+    "firebase": "9.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.4"

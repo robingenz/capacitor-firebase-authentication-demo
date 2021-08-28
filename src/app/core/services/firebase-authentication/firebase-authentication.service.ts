@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
+import { initializeApp } from '@firebase/app';
 import { Platform } from '@ionic/angular';
 import {
   FirebaseAuthentication,
@@ -19,7 +20,7 @@ export class FirebaseAuthenticationService {
     if (this.platform.is('capacitor')) {
       return;
     }
-    await FirebaseAuthentication.initialize(environment.firebase);
+    await initializeApp(environment.firebase);
   }
 
   public async getCurrentUser(): Promise<User | null> {
