@@ -1,8 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Home
-    </ion-title>
+    <ion-title> Home </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,48 +9,55 @@
     <ion-card-header>
       <ion-card-title>User Info</ion-card-title>
     </ion-card-header>
-    <ion-card-content *ngIf="currentUser">
-      <ion-item>
-        <ion-label position="stacked">UID</ion-label>
-        <ion-input [value]="currentUser.uid" readonly></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Display Name</ion-label>
-        <ion-input [value]="currentUser.displayName" readonly></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">E-Mail</ion-label>
-        <ion-input [value]="currentUser.email" readonly></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">E-Mail Verified</ion-label>
-        <ion-input [value]="currentUser.emailVerified" readonly></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Anonymous</ion-label>
-        <ion-input [value]="currentUser.isAnonymous ? 'yes' : 'no'" readonly></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Phone Number</ion-label>
-        <ion-input [value]="currentUser.phoneNumber" readonly></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Photo URL</ion-label>
-        <ion-input [value]="currentUser.photoUrl" readonly></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Provider ID</ion-label>
-        <ion-input [value]="currentUser.providerId" readonly></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Tenant ID</ion-label>
-        <ion-input [value]="currentUser.tenantId" readonly></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">ID Token</ion-label>
-        <ion-input [value]="idToken" readonly></ion-input>
-      </ion-item>
-      <ion-button expand="block" (click)="refreshIdToken()">Refresh ID Token</ion-button>
+    <ion-card-content>
+      <ng-container *ngIf="currentUser">
+        <ion-item>
+          <ion-label position="stacked">UID</ion-label>
+          <ion-input [value]="currentUser.uid" readonly></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Display Name</ion-label>
+          <ion-input [value]="currentUser.displayName" readonly></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">E-Mail</ion-label>
+          <ion-input [value]="currentUser.email" readonly></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">E-Mail Verified</ion-label>
+          <ion-input [value]="currentUser.emailVerified" readonly></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Anonymous</ion-label>
+          <ion-input
+            [value]="currentUser.isAnonymous ? 'yes' : 'no'"
+            readonly
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Phone Number</ion-label>
+          <ion-input [value]="currentUser.phoneNumber" readonly></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Photo URL</ion-label>
+          <ion-input [value]="currentUser.photoUrl" readonly></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Provider ID</ion-label>
+          <ion-input [value]="currentUser.providerId" readonly></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Tenant ID</ion-label>
+          <ion-input [value]="currentUser.tenantId" readonly></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">ID Token</ion-label>
+          <ion-input [value]="idToken" readonly></ion-input>
+        </ion-item>
+      </ng-container>
+      <ion-button expand="block" (click)="refreshIdToken()"
+        >Refresh ID Token</ion-button
+      >
       <ion-button expand="block" (click)="signOut()">Logout</ion-button>
     </ion-card-content>
   </ion-card>
@@ -65,8 +70,12 @@
         <ion-label position="stacked">Language</ion-label>
         <ion-input [(ngModel)]="languageCode" placeholder="en-US"></ion-input>
       </ion-item>
-      <ion-button expand="block" (click)="setLanguageCode(languageCode)">Set Language Code</ion-button>
-      <ion-button expand="block" (click)="useAppLanguage()">Use App Language</ion-button>
+      <ion-button expand="block" (click)="setLanguageCode(languageCode)"
+        >Set Language Code</ion-button
+      >
+      <ion-button expand="block" (click)="useAppLanguage()"
+        >Use App Language</ion-button
+      >
     </ion-card-content>
   </ion-card>
 </ion-content>

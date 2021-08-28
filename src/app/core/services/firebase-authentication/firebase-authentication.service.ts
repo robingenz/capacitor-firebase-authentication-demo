@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+import { environment } from '@env/environment';
+import { initializeApp } from '@firebase/app';
+import { Platform } from '@ionic/angular';
 import {
   FirebaseAuthentication,
   GetIdTokenOptions,
@@ -11,7 +14,14 @@ import {
   providedIn: 'root',
 })
 export class FirebaseAuthenticationService {
-  constructor() {}
+  constructor(private readonly platform: Platform) {}
+
+  public async initialize(): Promise<void> {
+    if (this.platform.is('capacitor')) {
+      return;
+    }
+    await initializeApp(environment.firebase);
+  }
 
   public async getCurrentUser(): Promise<User | null> {
     const result = await FirebaseAuthentication.getCurrentUser();
@@ -55,7 +65,9 @@ export class FirebaseAuthenticationService {
     await FirebaseAuthentication.signInWithYahoo();
   }
 
-  public async signInWithPhoneNumber(options: SignInWithPhoneNumberOptions): Promise<SignInWithPhoneNumberResult> {
+  public async signInWithPhoneNumber(
+    options: SignInWithPhoneNumberOptions
+  ): Promise<SignInWithPhoneNumberResult> {
     return FirebaseAuthentication.signInWithPhoneNumber(options);
   }
 
