@@ -20,7 +20,7 @@ export class FirebaseAuthenticationService {
     if (this.platform.is('capacitor')) {
       return;
     }
-    await initializeApp(environment.firebase);
+    initializeApp(environment.firebase);
   }
 
   public async getCurrentUser(): Promise<User | null> {
