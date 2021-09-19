@@ -57,6 +57,10 @@ export class FirebaseAuthenticationService {
     await FirebaseAuthentication.signInWithMicrosoft();
   }
 
+  public async signInWithPlayGames(): Promise<void> {
+    await FirebaseAuthentication.signInWithPlayGames();
+  }
+
   public async signInWithTwitter(): Promise<void> {
     await FirebaseAuthentication.signInWithTwitter();
   }

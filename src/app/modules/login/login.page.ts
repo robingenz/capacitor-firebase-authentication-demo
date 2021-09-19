@@ -34,6 +34,10 @@ export class LoginPage {
     await this.signInWith(SignInProvider.microsoft);
   }
 
+  public async signInWithPlayGames(): Promise<void> {
+    await this.signInWith(SignInProvider.playgames);
+  }
+
   public async signInWithTwitter(): Promise<void> {
     await this.signInWith(SignInProvider.twitter);
   }
@@ -65,8 +69,6 @@ export class LoginPage {
         verificationCode,
       });
       await this.navigateToHome();
-    } catch (error) {
-      await this.dialogService.showErrorAlert({ message: error });
     } finally {
       await loadingElement?.dismiss();
     }
@@ -91,6 +93,9 @@ export class LoginPage {
         case SignInProvider.microsoft:
           await this.firebaseAuthenticationService.signInWithMicrosoft();
           break;
+        case SignInProvider.playgames:
+          await this.firebaseAuthenticationService.signInWithPlayGames();
+          break;
         case SignInProvider.twitter:
           await this.firebaseAuthenticationService.signInWithTwitter();
           break;
@@ -99,8 +104,6 @@ export class LoginPage {
           break;
       }
       await this.navigateToHome();
-    } catch (error) {
-      await this.dialogService.showErrorAlert({ message: error });
     } finally {
       await loadingElement.dismiss();
     }
@@ -149,6 +152,7 @@ enum SignInProvider {
   github = 'github',
   google = 'google',
   microsoft = 'microsoft',
+  playgames = 'playgames',
   twitter = 'twitter',
   yahoo = 'yahoo',
 }
