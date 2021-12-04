@@ -59,7 +59,7 @@ jobs:
       - name: Add keystore files
         run: |
           echo "${{ secrets.KEYSTORE_PROPERTIES_BASE64 }}" | base64 --decode > android/keystore.properties
-          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/DHBW-VS.keystore
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/debug.keystore
       - name: Build with Gradle
         working-directory: android
         run: ./gradlew build
