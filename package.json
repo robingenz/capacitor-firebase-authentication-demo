@@ -27,7 +27,7 @@
     "@capacitor/app": "1.0.1",
     "@capacitor/core": "3.3.3",
     "@capacitor/haptics": "1.0.1",
-    "@capacitor/ios": "3.2.5",
+    "@capacitor/ios": "3.3.3",
     "@capacitor/keyboard": "1.0.1",
     "@ionic/angular": "6.0.0",
     "@robingenz/capacitor-firebase-authentication": "0.3.12-dev.d5f219f.1638652748",
