@@ -9,15 +9,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { GlobalErrorHandlerService } from './core';
 
 @NgModule({
-    declarations: [AppComponent],
-    imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
-    providers: [
-        { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-        {
-            provide: ErrorHandler,
-            useClass: GlobalErrorHandlerService,
-        },
-    ],
-    bootstrap: [AppComponent]
+  declarations: [AppComponent],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  providers: [
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    {
+      provide: ErrorHandler,
+      useClass: GlobalErrorHandlerService,
+    },
+  ],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
