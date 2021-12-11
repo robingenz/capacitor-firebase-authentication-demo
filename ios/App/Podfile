@@ -18,6 +18,8 @@ end
 target 'App' do
   capacitor_pods
   # Add your Pods here
+  pod 'RobingenzCapacitorFirebaseAuthentication/Facebook', :path => '../../node_modules/@robingenz/capacitor-firebase-authentication'
+  pod 'RobingenzCapacitorFirebaseAuthentication/Google', :path => '../../node_modules/@robingenz/capacitor-firebase-authentication'
 end
 
 # Source: https://www.jessesquires.com/blog/2020/07/20/xcode-12-drops-support-for-ios-8-fix-for-cocoapods/
