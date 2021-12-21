@@ -11,12 +11,12 @@ export class AuthGuard implements CanActivate {
     private readonly router: Router
   ) {}
 
-  public canActivate(): boolean {
-    const user = this.firebaseAuthenticationService.getCurrentUser();
-    if (!user) {
-      this.router.navigate(['/login']);
-      return false;
+  public async canActivate(): Promise<boolean> {
+    const user = await this.firebaseAuthenticationService.getCurrentUser();
+    if (user) {
+      return true;
     }
-    return true;
+    this.router.navigate(['/login']);
+    return false;
   }
 }

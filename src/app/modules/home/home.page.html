@@ -55,6 +55,9 @@
           <ion-input [value]="idToken" readonly></ion-input>
         </ion-item>
       </ng-container>
+      <ion-button expand="block" (click)="refreshCurrentUser()"
+        >Refresh Current User</ion-button
+      >
       <ion-button expand="block" (click)="refreshIdToken()"
         >Refresh ID Token</ion-button
       >

@@ -49,6 +49,15 @@ export class HomePage implements OnInit {
     }
   }
 
+  public async refreshCurrentUser(): Promise<void> {
+    const loadingElement = await this.dialogService.showLoading();
+    try {
+      this.currentUser = await this.firebaseAuthenticationService.getCurrentUser();
+    } finally {
+      await loadingElement.dismiss();
+    }
+  }
+
   public async setLanguageCode(languageCode: string): Promise<void> {
     await this.firebaseAuthenticationService.setLanguageCode(languageCode);
   }
