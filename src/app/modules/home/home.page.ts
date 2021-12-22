@@ -52,7 +52,8 @@ export class HomePage implements OnInit {
   public async refreshCurrentUser(): Promise<void> {
     const loadingElement = await this.dialogService.showLoading();
     try {
-      this.currentUser = await this.firebaseAuthenticationService.getCurrentUser();
+      this.currentUser =
+        await this.firebaseAuthenticationService.getCurrentUser();
     } finally {
       await loadingElement.dismiss();
     }
