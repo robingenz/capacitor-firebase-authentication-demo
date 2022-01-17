@@ -32,7 +32,7 @@
     "@ionic/angular": "6.0.1",
     "@robingenz/capacitor-firebase-authentication": "0.4.0",
     "firebase": "9.6.2",
-    "rxjs": "7.5.1",
+    "rxjs": "7.5.2",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.4"
   },
