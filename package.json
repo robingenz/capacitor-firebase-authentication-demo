@@ -19,6 +19,7 @@
   "dependencies": {
     "@angular/common": "~13.1.2",
     "@angular/core": "~13.1.1",
+    "@angular/fire": "7.2.0",
     "@angular/forms": "~13.1.2",
     "@angular/platform-browser": "~13.1.2",
     "@angular/platform-browser-dynamic": "~13.1.2",
