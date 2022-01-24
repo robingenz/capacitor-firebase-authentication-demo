@@ -26,7 +26,7 @@
     "@capacitor/android": "3.3.4",
     "@capacitor/app": "1.0.7",
     "@capacitor/core": "3.3.4",
-    "@capacitor/haptics": "1.1.3",
+    "@capacitor/haptics": "1.1.4",
     "@capacitor/ios": "3.3.4",
     "@capacitor/keyboard": "1.2.0",
     "@ionic/angular": "6.0.1",
