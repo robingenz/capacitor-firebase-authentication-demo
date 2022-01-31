@@ -31,7 +31,7 @@
     "@capacitor/keyboard": "1.2.1",
     "@ionic/angular": "6.0.3",
     "@robingenz/capacitor-firebase-authentication": "0.4.0",
-    "firebase": "9.6.4",
+    "firebase": "9.6.5",
     "rxjs": "7.5.2",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.4"
@@ -55,7 +55,7 @@
     "@typescript-eslint/parser": "5.10.1",
     "eslint": "8.7.0",
     "eslint-plugin-import": "2.25.4",
-    "eslint-plugin-jsdoc": "37.6.3",
+    "eslint-plugin-jsdoc": "37.7.0",
     "eslint-plugin-prefer-arrow": "1.2.3",
     "jasmine-core": "4.0.0",
     "jasmine-spec-reporter": "7.0.0",
@@ -67,7 +67,7 @@
     "karma-jasmine-html-reporter": "^1.5.0",
     "prettier": "2.5.1",
     "protractor": "~7.0.0",
-    "puppeteer": "13.1.1",
+    "puppeteer": "13.1.3",
     "ts-node": "10.4.0",
     "typescript": "~4.5.5"
   },
