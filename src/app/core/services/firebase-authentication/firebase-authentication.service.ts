@@ -1,20 +1,39 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { environment } from '@env/environment';
 import { initializeApp } from '@firebase/app';
 import { Platform } from '@ionic/angular';
 import {
+  AuthStateChange,
   FirebaseAuthentication,
   GetIdTokenOptions,
   SignInWithPhoneNumberOptions,
   SignInWithPhoneNumberResult,
   User,
 } from '@robingenz/capacitor-firebase-authentication';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FirebaseAuthenticationService {
-  constructor(private readonly platform: Platform) {}
+  private readonly authStateSubj = new Subject<AuthStateChange>();
+
+  constructor(
+    private readonly platform: Platform,
+    private readonly ngZone: NgZone
+  ) {
+    FirebaseAuthentication.removeAllListeners().then(() => {
+      FirebaseAuthentication.addListener('authStateChange', (change) => {
+        this.ngZone.run(() => {
+          this.authStateSubj.next(change);
+        });
+      });
+    });
+  }
+
+  public get authState$(): Observable<AuthStateChange> {
+    return this.authStateSubj.asObservable();
+  }
 
   public async initialize(): Promise<void> {
     if (this.platform.is('capacitor')) {
