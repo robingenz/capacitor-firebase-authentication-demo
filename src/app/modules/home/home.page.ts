@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DialogService, FirebaseAuthenticationService } from '@app/core';
-import { User } from '@robingenz/capacitor-firebase-authentication';
+import { User } from '@capacitor-firebase/authentication';
 
 @Component({
   selector: 'app-home',

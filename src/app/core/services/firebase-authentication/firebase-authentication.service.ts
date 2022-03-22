@@ -9,7 +9,7 @@ import {
   SignInWithPhoneNumberOptions,
   SignInWithPhoneNumberResult,
   User,
-} from '@robingenz/capacitor-firebase-authentication';
+} from '@capacitor-firebase/authentication';
 import { Observable, Subject } from 'rxjs';
 
 @Injectable({
