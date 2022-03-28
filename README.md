@@ -10,7 +10,7 @@
 
 The following plugins are included:
 
-- [robingenz/capacitor-firebase](https://github.com/robingenz/capacitor-firebase)
+- [capacitor-firebase/authentication](https://github.com/robingenz/capacitor-firebase)
 
 ## Development Setup 💻
 
