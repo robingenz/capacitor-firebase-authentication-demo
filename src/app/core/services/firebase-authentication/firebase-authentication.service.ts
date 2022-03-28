@@ -1,7 +1,4 @@
 import { Injectable, NgZone } from '@angular/core';
-import { environment } from '@env/environment';
-import { initializeApp } from '@firebase/app';
-import { Platform } from '@ionic/angular';
 import {
   AuthStateChange,
   FirebaseAuthentication,
@@ -10,6 +7,9 @@ import {
   SignInWithPhoneNumberResult,
   User,
 } from '@capacitor-firebase/authentication';
+import { environment } from '@env/environment';
+import { initializeApp } from '@firebase/app';
+import { Platform } from '@ionic/angular';
 import { Observable, Subject } from 'rxjs';
 
 @Injectable({
@@ -39,6 +39,11 @@ export class FirebaseAuthenticationService {
     if (this.platform.is('capacitor')) {
       return;
     }
+    /**
+     * Only needed if the Firebase JavaScript SDK is used.
+     *
+     * Read more: https://github.com/robingenz/capacitor-firebase/blob/main/packages/authentication/docs/firebase-js-sdk.md
+     */
     initializeApp(environment.firebase);
   }
 
