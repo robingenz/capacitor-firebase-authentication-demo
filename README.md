@@ -1,16 +1,16 @@
-#  capacitor-firebase-authentication-demo
+# capacitor-firebase-authentication-demo
 
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/robingenz/capacitor-firebase-authentication-demo/CI/main)](https://github.com/robingenz/capacitor-firebase-authentication-demo/actions)
 
 <!-- [![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/robingenz/capacitor-firebase-authentication-demo?color=brightgreen&label=version)](https://github.com/robingenz/capacitor-firebase-authentication-demo/releases) -->
 
-⚡️ Simple Ionic Angular app to demonstrate the use of the [Capacitor Firebase Authentication plugin](https://github.com/robingenz/capacitor-firebase-authentication). 
+⚡️ Simple Ionic Angular app to demonstrate the use of the [Capacitor Firebase Authentication plugin](https://github.com/robingenz/capacitor-firebase-authentication).
 
 ## Plugins
 
 The following plugins are included:
 
-- [robingenz/capacitor-firebase-authentication](https://github.com/robingenz/capacitor-firebase-authentication)
+- [robingenz/capacitor-firebase](https://github.com/robingenz/capacitor-firebase)
 
 ## Development Setup 💻
 
