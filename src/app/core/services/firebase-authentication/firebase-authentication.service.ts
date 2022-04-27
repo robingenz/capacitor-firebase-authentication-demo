@@ -47,6 +47,16 @@ export class FirebaseAuthenticationService {
     initializeApp(environment.firebase);
   }
 
+  public async createUserWithEmailAndPassword(
+    email: string,
+    password: string
+  ): Promise<void> {
+    await FirebaseAuthentication.createUserWithEmailAndPassword({
+      email,
+      password,
+    });
+  }
+
   public async getCurrentUser(): Promise<User | null> {
     const result = await FirebaseAuthentication.getCurrentUser();
     return result.user;
@@ -63,6 +73,16 @@ export class FirebaseAuthenticationService {
 
   public async signInWithApple(): Promise<void> {
     await FirebaseAuthentication.signInWithApple();
+  }
+
+  public async signInWithEmailAndPassword(
+    email: string,
+    password: string
+  ): Promise<void> {
+    await FirebaseAuthentication.signInWithEmailAndPassword({
+      email,
+      password,
+    });
   }
 
   public async signInWithFacebook(): Promise<void> {

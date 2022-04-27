@@ -18,6 +18,11 @@ export class LoginPage {
     await this.signInWith(SignInProvider.apple);
   }
 
+  public async signInWithEmailAndPassword(): Promise<void> {
+    await this.firebaseAuthenticationService.signInWithEmailAndPassword('', '');
+    await this.navigateToHome();
+  }
+
   public async signInWithFacebook(): Promise<void> {
     await this.signInWith(SignInProvider.facebook);
   }
