@@ -69,7 +69,7 @@
     "protractor": "~7.0.0",
     "puppeteer": "14.1.2",
     "ts-node": "10.8.0",
-    "typescript": "~4.5.5"
+    "typescript": "~4.6.4"
   },
   "description": "An Ionic project"
 }
