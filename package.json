@@ -23,7 +23,7 @@
     "@angular/platform-browser": "14.0.4",
     "@angular/platform-browser-dynamic": "14.0.4",
     "@angular/router": "14.0.4",
-    "@capacitor-firebase/authentication": "0.3.0",
+    "@capacitor-firebase/authentication": "0.5.0",
     "@capacitor/android": "3.5.1",
     "@capacitor/app": "1.1.1",
     "@capacitor/core": "3.5.1",
