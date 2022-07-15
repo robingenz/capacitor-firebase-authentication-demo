@@ -6,4 +6,5 @@
     <string name="custom_url_scheme">dev.robingenz.capacitor.firebaseauth.demo</string>
     <string name="facebook_app_id">1501423050210862</string>
     <string name="fb_login_protocol_scheme">fb1501423050210862</string>
+    <string name="facebook_client_token">4799001ab08ffafb5902706bb4c92938</string>
 </resources>
