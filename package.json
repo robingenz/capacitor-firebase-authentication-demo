@@ -30,7 +30,7 @@
     "@capacitor/haptics": "1.1.4",
     "@capacitor/ios": "3.6.0",
     "@capacitor/keyboard": "1.2.3",
-    "@ionic/angular": "6.1.12",
+    "@ionic/angular": "6.2.0",
     "firebase": "9.8.4",
     "rxjs": "7.5.5",
     "tslib": "2.4.0",
