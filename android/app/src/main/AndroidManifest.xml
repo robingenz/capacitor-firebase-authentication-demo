@@ -35,6 +35,7 @@
         </activity>
 
         <activity
+            android:exported="true"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode"
             android:name="dev.robingenz.capacitor.firebaseauth.demo.MainActivity"
             android:label="@string/title_activity_main"
