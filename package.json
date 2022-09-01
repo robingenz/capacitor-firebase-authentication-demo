@@ -26,7 +26,7 @@
     "@capacitor/app": "4.0.1",
     "@capacitor/core": "4.0.1",
     "@capacitor/haptics": "4.0.1",
-    "@capacitor/ios": "4.0.1",
+    "@capacitor/ios": "4.1.0",
     "@capacitor/keyboard": "4.0.1",
     "@ionic/angular": "6.2.1",
     "firebase": "9.9.2",
