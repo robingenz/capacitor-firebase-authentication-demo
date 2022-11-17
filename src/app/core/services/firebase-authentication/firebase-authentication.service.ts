@@ -1,6 +1,5 @@
 import { Injectable, NgZone } from '@angular/core';
 import {
-  AuthStateChange,
   FirebaseAuthentication,
   GetIdTokenOptions,
   SignInWithPhoneNumberOptions,
@@ -8,15 +7,15 @@ import {
   User,
 } from '@capacitor-firebase/authentication';
 import { environment } from '@env/environment';
-import { initializeApp } from '@firebase/app';
 import { Platform } from '@ionic/angular';
-import { Observable, Subject } from 'rxjs';
+import { initializeApp } from 'firebase/app';
+import { lastValueFrom, Observable, ReplaySubject, take } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FirebaseAuthenticationService {
-  private readonly authStateSubj = new Subject<AuthStateChange>();
+  private currentUserSubject = new ReplaySubject<User | null>(1);
 
   constructor(
     private readonly platform: Platform,
@@ -25,14 +24,14 @@ export class FirebaseAuthenticationService {
     FirebaseAuthentication.removeAllListeners().then(() => {
       FirebaseAuthentication.addListener('authStateChange', (change) => {
         this.ngZone.run(() => {
-          this.authStateSubj.next(change);
+          this.currentUserSubject.next(change.user);
         });
       });
     });
   }
 
-  public get authState$(): Observable<AuthStateChange> {
-    return this.authStateSubj.asObservable();
+  public get currentUser$(): Observable<User | null> {
+    return this.currentUserSubject.asObservable();
   }
 
   public async initialize(): Promise<void> {
@@ -47,9 +46,8 @@ export class FirebaseAuthenticationService {
     initializeApp(environment.firebase);
   }
 
-  public async getCurrentUser(): Promise<User | null> {
-    const result = await FirebaseAuthentication.getCurrentUser();
-    return result.user;
+  public getCurrentUser(): Promise<User | null> {
+    return lastValueFrom(this.currentUser$.pipe(take(1)));
   }
 
   public async getIdToken(options?: GetIdTokenOptions): Promise<string> {
