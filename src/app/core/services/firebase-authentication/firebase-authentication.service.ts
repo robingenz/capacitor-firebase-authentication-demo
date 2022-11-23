@@ -46,6 +46,10 @@ export class FirebaseAuthenticationService {
     initializeApp(environment.firebase);
   }
 
+  public async checkRedirectResult(): Promise<void> {
+    await FirebaseAuthentication.getRedirectResult();
+  }
+
   public getCurrentUser(): Promise<User | null> {
     return lastValueFrom(this.currentUser$.pipe(take(1)));
   }
@@ -72,7 +76,9 @@ export class FirebaseAuthenticationService {
   }
 
   public async signInWithGoogle(): Promise<void> {
-    await FirebaseAuthentication.signInWithGoogle();
+    await FirebaseAuthentication.signInWithGoogle({
+      mode: 'redirect',
+    });
   }
 
   public async signInWithMicrosoft(): Promise<void> {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DialogService, FirebaseAuthenticationService } from '@app/core';
 
@@ -7,12 +7,16 @@ import { DialogService, FirebaseAuthenticationService } from '@app/core';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage {
+export class LoginPage implements OnInit {
   constructor(
     private readonly firebaseAuthenticationService: FirebaseAuthenticationService,
     private readonly dialogService: DialogService,
     private readonly router: Router
   ) {}
+
+  public ngOnInit(): void {
+    this.firebaseAuthenticationService.checkRedirectResult();
+  }
 
   public async signInWithApple(): Promise<void> {
     await this.signInWith(SignInProvider.apple);
