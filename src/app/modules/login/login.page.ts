@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DialogService, FirebaseAuthenticationService } from '@app/core';
-import { combineLatest, startWith, takeUntil } from 'rxjs';
+import { combineLatest, startWith, takeUntil, tap } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -53,19 +53,27 @@ export class LoginPage implements OnInit {
 
   public async signInWithPhoneNumber(): Promise<void> {
     let loadingElement: HTMLIonLoadingElement | undefined;
-    try {
-      const phoneNumber = await this.showInputPhoneNumberAlert();
-      if (!phoneNumber) {
-        return;
-      }
-      loadingElement = await this.dialogService.showLoading();
-      void this.firebaseAuthenticationService.signInWithPhoneNumber({
-        phoneNumber,
-      });
-      combineLatest([
-        this.firebaseAuthenticationService.phoneVerificationId$,
-        this.firebaseAuthenticationService.phoneVerificationCode$.pipe(startWith(undefined)),
-      ]).pipe(takeUntil(this.firebaseAuthenticationService.currentUser$)).subscribe(async ([verificationId, verificationCode]) => {
+    const phoneNumber = await this.showInputPhoneNumberAlert();
+    if (!phoneNumber) {
+      return;
+    }
+    loadingElement = await this.dialogService.showLoading();
+    combineLatest([
+      this.firebaseAuthenticationService.phoneVerificationId$,
+      this.firebaseAuthenticationService.phoneVerificationCode$.pipe(
+        startWith(undefined)
+      ),
+    ])
+      .pipe(
+        takeUntil(
+          this.firebaseAuthenticationService.phoneVerificationErrorMessage$.pipe(
+            tap(() => {
+              void loadingElement?.dismiss();
+            })
+          )
+        )
+      )
+      .subscribe(async ([verificationId, verificationCode]) => {
         await loadingElement?.dismiss();
         loadingElement = undefined;
         if (verificationCode) {
@@ -81,11 +89,12 @@ export class LoginPage implements OnInit {
           verificationId,
           verificationCode,
         });
+        await loadingElement.dismiss();
+        await this.navigateToHome();
       });
-      await this.navigateToHome();
-    } finally {
-      await loadingElement?.dismiss();
-    }
+    void this.firebaseAuthenticationService.signInWithPhoneNumber({
+      phoneNumber,
+    });
   }
 
   private async signInWith(provider: SignInProvider): Promise<void> {

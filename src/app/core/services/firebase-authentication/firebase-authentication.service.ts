@@ -1,5 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
 import {
+  AuthStateChange,
   FirebaseAuthentication,
   GetIdTokenOptions,
   SignInWithPhoneNumberOptions,
@@ -26,31 +27,45 @@ export class FirebaseAuthenticationService {
     private readonly ngZone: NgZone
   ) {
     void FirebaseAuthentication.removeAllListeners().then(() => {
-      void FirebaseAuthentication.addListener('authStateChange', (change) => {
-        this.ngZone.run(() => {
-          this.currentUserSubject.next(change.user);
-        });
-      });
-      void FirebaseAuthentication.addListener('phoneVerificationCompleted', (event) => {
-        this.ngZone.run(() => {
-          this.phoneVerificationCodeSubject.next(event.verificationCode);
-        });
-      });
-      void FirebaseAuthentication.addListener('phoneVerificationFailed', (event) => {
-        this.ngZone.run(() => {
-          this.phoneVerificationErrorMessageSubject.next(event.message);
-        });
-      });
-      void FirebaseAuthentication.addListener('phoneCodeSent', (event) => {
-        this.ngZone.run(() => {
-          this.phoneVerificationIdSubject.next(event.verificationId);
-        });
-      });
+      void FirebaseAuthentication.addListener(
+        'authStateChange',
+        (change: AuthStateChange) => {
+          this.ngZone.run(() => {
+            this.currentUserSubject.next(change.user);
+          });
+        }
+      );
+      void FirebaseAuthentication.addListener(
+        'phoneVerificationCompleted',
+        (event: { verificationCode: string }) => {
+          this.ngZone.run(() => {
+            this.phoneVerificationCodeSubject.next(event.verificationCode);
+          });
+        }
+      );
+      void FirebaseAuthentication.addListener(
+        'phoneVerificationFailed',
+        (event: { message: string }) => {
+          this.ngZone.run(() => {
+            this.phoneVerificationErrorMessageSubject.next(event.message);
+          });
+        }
+      );
+      void FirebaseAuthentication.addListener(
+        'phoneCodeSent',
+        (event: { verificationId: string }) => {
+          this.ngZone.run(() => {
+            this.phoneVerificationIdSubject.next(event.verificationId);
+          });
+        }
+      );
     });
     // Only needed to support dev livereload.
-    void FirebaseAuthentication.getCurrentUser().then((result) => {
-      this.currentUserSubject.next(result.user);
-    });
+    void FirebaseAuthentication.getCurrentUser().then(
+      (result: AuthStateChange) => {
+        this.currentUserSubject.next(result.user);
+      }
+    );
   }
 
   public get currentUser$(): Observable<User | null> {
