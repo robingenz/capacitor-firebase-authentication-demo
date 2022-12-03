@@ -29,6 +29,10 @@ export class FirebaseAuthenticationService {
         });
       });
     });
+    // Only needed to support dev livereload.
+    FirebaseAuthentication.getCurrentUser().then(result => {
+      this.currentUserSubject.next(result.user);
+    });
   }
 
   public get currentUser$(): Observable<User | null> {
