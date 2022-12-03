@@ -30,7 +30,7 @@ export class FirebaseAuthenticationService {
       });
     });
     // Only needed to support dev livereload.
-    FirebaseAuthentication.getCurrentUser().then(result => {
+    FirebaseAuthentication.getCurrentUser().then((result) => {
       this.currentUserSubject.next(result.user);
     });
   }

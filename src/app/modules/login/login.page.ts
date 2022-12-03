@@ -53,7 +53,7 @@ export class LoginPage implements OnInit {
   public async signInWithPhoneNumber(): Promise<void> {
     let loadingElement: HTMLIonLoadingElement | undefined;
     try {
-      const phoneNumber = await this.getPhoneNumber();
+      const phoneNumber = await this.showInputPhoneNumberAlert();
       if (!phoneNumber) {
         return;
       }
@@ -63,7 +63,7 @@ export class LoginPage implements OnInit {
           phoneNumber,
         });
       await loadingElement.dismiss();
-      const verificationCode = await this.getVerificationCode();
+      const verificationCode = await this.showInputVerificationCodeAlert();
       if (!verificationCode) {
         return;
       }
@@ -117,7 +117,7 @@ export class LoginPage implements OnInit {
     await this.router.navigate(['/home'], { replaceUrl: true });
   }
 
-  private async getPhoneNumber(): Promise<string | undefined> {
+  private async showInputPhoneNumberAlert(): Promise<string | undefined> {
     const data = await this.dialogService.showInputAlert({
       inputs: [
         {
@@ -133,7 +133,7 @@ export class LoginPage implements OnInit {
     return data.phoneNumber;
   }
 
-  private async getVerificationCode(): Promise<string | undefined> {
+  private async showInputVerificationCodeAlert(): Promise<string | undefined> {
     const data = await this.dialogService.showInputAlert({
       inputs: [
         {
