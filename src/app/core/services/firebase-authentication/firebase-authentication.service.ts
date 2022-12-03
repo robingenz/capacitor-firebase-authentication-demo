@@ -6,6 +6,7 @@ import {
   SignInWithPhoneNumberResult,
   User,
 } from '@capacitor-firebase/authentication';
+import { Capacitor } from '@capacitor/core';
 import { environment } from '@env/environment';
 import { Platform } from '@ionic/angular';
 import { initializeApp } from 'firebase/app';
@@ -47,6 +48,9 @@ export class FirebaseAuthenticationService {
   }
 
   public async checkRedirectResult(): Promise<void> {
+    if (Capacitor.isNativePlatform()) {
+      return;
+    }
     await FirebaseAuthentication.getRedirectResult();
   }
 
