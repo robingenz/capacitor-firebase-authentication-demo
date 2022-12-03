@@ -29,6 +29,10 @@ export class DialogService {
     return alert;
   }
 
+  public async dismissAlert(): Promise<void> {
+    await this.alertCtrl.dismiss();
+  }
+
   public async showErrorAlert(
     opts?: AlertOptions
   ): Promise<HTMLIonAlertElement> {
@@ -61,7 +65,7 @@ export class DialogService {
         ],
       };
       opts = { ...defaultOpts, ...opts };
-      this.showAlert(opts);
+      void this.showAlert(opts);
     });
     return promise;
   }

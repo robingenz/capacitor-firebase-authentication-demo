@@ -10,33 +10,63 @@ import { Capacitor } from '@capacitor/core';
 import { environment } from '@env/environment';
 import { Platform } from '@ionic/angular';
 import { initializeApp } from 'firebase/app';
-import { lastValueFrom, Observable, ReplaySubject, take } from 'rxjs';
+import { lastValueFrom, Observable, ReplaySubject, Subject, take } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FirebaseAuthenticationService {
   private currentUserSubject = new ReplaySubject<User | null>(1);
+  private phoneVerificationCodeSubject = new Subject<string>();
+  private phoneVerificationErrorMessageSubject = new Subject<string>();
+  private phoneVerificationIdSubject = new Subject<string>();
 
   constructor(
     private readonly platform: Platform,
     private readonly ngZone: NgZone
   ) {
-    FirebaseAuthentication.removeAllListeners().then(() => {
-      FirebaseAuthentication.addListener('authStateChange', (change) => {
+    void FirebaseAuthentication.removeAllListeners().then(() => {
+      void FirebaseAuthentication.addListener('authStateChange', (change) => {
         this.ngZone.run(() => {
           this.currentUserSubject.next(change.user);
         });
       });
+      void FirebaseAuthentication.addListener('phoneVerificationCompleted', (event) => {
+        this.ngZone.run(() => {
+          this.phoneVerificationCodeSubject.next(event.verificationCode);
+        });
+      });
+      void FirebaseAuthentication.addListener('phoneVerificationFailed', (event) => {
+        this.ngZone.run(() => {
+          this.phoneVerificationErrorMessageSubject.next(event.message);
+        });
+      });
+      void FirebaseAuthentication.addListener('phoneCodeSent', (event) => {
+        this.ngZone.run(() => {
+          this.phoneVerificationIdSubject.next(event.verificationId);
+        });
+      });
     });
     // Only needed to support dev livereload.
-    FirebaseAuthentication.getCurrentUser().then((result) => {
+    void FirebaseAuthentication.getCurrentUser().then((result) => {
       this.currentUserSubject.next(result.user);
     });
   }
 
   public get currentUser$(): Observable<User | null> {
     return this.currentUserSubject.asObservable();
+  }
+
+  public get phoneVerificationCode$(): Observable<string> {
+    return this.phoneVerificationCodeSubject.asObservable();
+  }
+
+  public get phoneVerificationErrorMessage$(): Observable<string> {
+    return this.phoneVerificationErrorMessageSubject.asObservable();
+  }
+
+  public get phoneVerificationId$(): Observable<string> {
+    return this.phoneVerificationIdSubject.asObservable();
   }
 
   public async initialize(): Promise<void> {

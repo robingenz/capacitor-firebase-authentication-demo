@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DialogService, FirebaseAuthenticationService } from '@app/core';
+import { combineLatest, startWith, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginPage implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.firebaseAuthenticationService.checkRedirectResult();
+    void this.firebaseAuthenticationService.checkRedirectResult();
   }
 
   public async signInWithApple(): Promise<void> {
@@ -58,19 +59,28 @@ export class LoginPage implements OnInit {
         return;
       }
       loadingElement = await this.dialogService.showLoading();
-      const { verificationId } =
+      void this.firebaseAuthenticationService.signInWithPhoneNumber({
+        phoneNumber,
+      });
+      combineLatest([
+        this.firebaseAuthenticationService.phoneVerificationId$,
+        this.firebaseAuthenticationService.phoneVerificationCode$.pipe(startWith(undefined)),
+      ]).pipe(takeUntil(this.firebaseAuthenticationService.currentUser$)).subscribe(async ([verificationId, verificationCode]) => {
+        await loadingElement?.dismiss();
+        loadingElement = undefined;
+        if (verificationCode) {
+          await this.dialogService.dismissAlert().catch();
+        } else {
+          verificationCode = await this.showInputVerificationCodeAlert();
+          if (!verificationCode) {
+            return;
+          }
+        }
+        loadingElement = await this.dialogService.showLoading();
         await this.firebaseAuthenticationService.signInWithPhoneNumber({
-          phoneNumber,
+          verificationId,
+          verificationCode,
         });
-      await loadingElement.dismiss();
-      const verificationCode = await this.showInputVerificationCodeAlert();
-      if (!verificationCode) {
-        return;
-      }
-      loadingElement = await this.dialogService.showLoading();
-      await this.firebaseAuthenticationService.signInWithPhoneNumber({
-        verificationId,
-        verificationCode,
       });
       await this.navigateToHome();
     } finally {
