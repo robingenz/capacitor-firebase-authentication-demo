@@ -67,8 +67,11 @@ export class LoginPage implements OnInit {
       .pipe(
         takeUntil(
           this.firebaseAuthenticationService.phoneVerificationErrorMessage$.pipe(
-            tap(() => {
+            tap((message) => {
               void loadingElement?.dismiss();
+              void this.dialogService.showErrorAlert({
+                message,
+              });
             })
           )
         )

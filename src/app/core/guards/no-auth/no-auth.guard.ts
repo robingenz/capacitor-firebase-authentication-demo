@@ -14,7 +14,7 @@ export class NoAuthGuard implements CanActivate {
   public async canActivate(): Promise<boolean> {
     const user = await this.firebaseAuthenticationService.getCurrentUser();
     if (user) {
-      this.router.navigate(['/']);
+      void this.router.navigate(['/']);
       return false;
     }
     return true;

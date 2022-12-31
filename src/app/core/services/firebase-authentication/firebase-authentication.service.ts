@@ -3,6 +3,9 @@ import {
   AuthStateChange,
   FirebaseAuthentication,
   GetIdTokenOptions,
+  PhoneCodeSent,
+  PhoneVerificationCompleted,
+  PhoneVerificationFailed,
   SignInWithPhoneNumberOptions,
   SignInWithPhoneNumberResult,
   User,
@@ -37,7 +40,8 @@ export class FirebaseAuthenticationService {
       );
       void FirebaseAuthentication.addListener(
         'phoneVerificationCompleted',
-        (event: { verificationCode: string }) => {
+        (event: PhoneVerificationCompleted) => {
+          console.log(event);
           this.ngZone.run(() => {
             this.phoneVerificationCodeSubject.next(event.verificationCode);
           });
@@ -45,7 +49,8 @@ export class FirebaseAuthenticationService {
       );
       void FirebaseAuthentication.addListener(
         'phoneVerificationFailed',
-        (event: { message: string }) => {
+        (event: PhoneVerificationFailed) => {
+          console.log(event);
           this.ngZone.run(() => {
             this.phoneVerificationErrorMessageSubject.next(event.message);
           });
@@ -53,7 +58,8 @@ export class FirebaseAuthenticationService {
       );
       void FirebaseAuthentication.addListener(
         'phoneCodeSent',
-        (event: { verificationId: string }) => {
+        (event: PhoneCodeSent) => {
+          console.log(event);
           this.ngZone.run(() => {
             this.phoneVerificationIdSubject.next(event.verificationId);
           });
