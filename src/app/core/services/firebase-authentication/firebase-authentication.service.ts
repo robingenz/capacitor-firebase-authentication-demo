@@ -9,7 +9,16 @@ import {
 import { Capacitor } from '@capacitor/core';
 import { environment } from '@env/environment';
 import { Platform } from '@ionic/angular';
-import { initializeApp } from 'firebase/app';
+import { getApp, initializeApp } from 'firebase/app';
+import {
+  getAuth,
+  GoogleAuthProvider,
+  indexedDBLocalPersistence,
+  initializeAuth,
+  OAuthProvider,
+  onAuthStateChanged,
+  signInWithCredential,
+} from 'firebase/auth';
 import { lastValueFrom, Observable, ReplaySubject, take } from 'rxjs';
 
 @Injectable({
@@ -33,6 +42,10 @@ export class FirebaseAuthenticationService {
     FirebaseAuthentication.getCurrentUser().then((result) => {
       this.currentUserSubject.next(result.user);
     });
+    const auth = this.getFirebaseAuth();
+    onAuthStateChanged(auth, (user) => {
+      console.log('Firebase JS SDK auth state changed', { user });
+    });
   }
 
   public get currentUser$(): Observable<User | null> {
@@ -40,15 +53,15 @@ export class FirebaseAuthenticationService {
   }
 
   public async initialize(): Promise<void> {
-    if (this.platform.is('capacitor')) {
-      return;
-    }
+    // if (this.platform.is('capacitor')) {
+    //   return;
+    // }
     /**
      * Only needed if the Firebase JavaScript SDK is used.
      *
      * Read more: https://github.com/robingenz/capacitor-firebase/blob/main/packages/authentication/docs/firebase-js-sdk.md
      */
-    initializeApp(environment.firebase);
+    // initializeApp(environment.firebase);
   }
 
   public async checkRedirectResult(): Promise<void> {
@@ -72,7 +85,16 @@ export class FirebaseAuthenticationService {
   }
 
   public async signInWithApple(): Promise<void> {
-    await FirebaseAuthentication.signInWithApple();
+    // 1. Create credentials on the native layer
+    const result = await FirebaseAuthentication.signInWithApple();
+    // 2. Sign in on the web layer using the id token and nonce
+    const provider = new OAuthProvider('apple.com');
+    const credential = provider.credential({
+      idToken: result.credential?.idToken,
+      rawNonce: result.credential?.nonce,
+    });
+    const auth = getAuth();
+    await signInWithCredential(auth, credential);
   }
 
   public async signInWithFacebook(): Promise<void> {
@@ -84,9 +106,14 @@ export class FirebaseAuthenticationService {
   }
 
   public async signInWithGoogle(): Promise<void> {
-    await FirebaseAuthentication.signInWithGoogle({
-      mode: 'redirect',
-    });
+    // 1. Create credentials on the native layer
+    const result = await FirebaseAuthentication.signInWithGoogle();
+    // 2. Sign in on the web layer using the id token
+    const credential = GoogleAuthProvider.credential(
+      result.credential?.idToken
+    );
+    const auth = getAuth();
+    await signInWithCredential(auth, credential);
   }
 
   public async signInWithMicrosoft(): Promise<void> {
@@ -117,5 +144,16 @@ export class FirebaseAuthenticationService {
 
   public async useAppLanguage(): Promise<void> {
     await FirebaseAuthentication.useAppLanguage();
+  }
+
+  private getFirebaseAuth(): any {
+    initializeApp(environment.firebase);
+    if (Capacitor.isNativePlatform()) {
+      return initializeAuth(getApp(), {
+        persistence: indexedDBLocalPersistence,
+      });
+    } else {
+      return getAuth();
+    }
   }
 }
