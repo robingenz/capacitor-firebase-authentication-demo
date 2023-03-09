@@ -56,6 +56,22 @@ npx ionic cap run ios
 
 This project uses [Ionic](https://ionicframework.com/) as app development platform and the [Ionic CLI](https://ionicframework.com/docs/cli).
 
+### Quirks
+
+If [Capacitor Firebase Authentication](https://github.com/capawesome-team/capacitor-firebase/tree/main/packages/authentication) is installed locally instead of using an already published version from the npm registry, then the following `paths` must be added to `tsconfig.json` of your project to test the web implementation:
+
+```json
+{
+  "compilerOptions": {
+    "paths": {
+      "firebase/*": ["../capacitor-firebase/node_modules/firebase/*"]
+    }
+  }
+}
+```
+
+> Note: You may need to adjust the path to your environment.
+
 <!-- ## Changelog
 
 See [CHANGELOG.md](https://github.com/robingenz/capacitor-firebase-authentication-demo/blob/main/CHANGELOG.md). -->
