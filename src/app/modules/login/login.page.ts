@@ -16,6 +16,28 @@ export class LoginPage implements OnInit {
 
   public ngOnInit(): void {
     this.firebaseAuthenticationService.checkRedirectResult();
+    this.firebaseAuthenticationService.phoneVerificationCompleted$.subscribe(
+      () => this.navigateToHome()
+    );
+    this.firebaseAuthenticationService.phoneCodeSent$.subscribe(
+      async (event) => {
+        const verificationCode = await this.showInputVerificationCodeAlert();
+        if (!verificationCode) {
+          return;
+        }
+        let loadingElement: HTMLIonLoadingElement | undefined;
+        try {
+          loadingElement = await this.dialogService.showLoading();
+          await this.firebaseAuthenticationService.confirmVerificationCode({
+            verificationCode,
+            verificationId: event.verificationId,
+          });
+          await this.navigateToHome();
+        } finally {
+          await loadingElement?.dismiss();
+        }
+      }
+    );
   }
 
   public async signInWithApple(): Promise<void> {
@@ -58,21 +80,10 @@ export class LoginPage implements OnInit {
         return;
       }
       loadingElement = await this.dialogService.showLoading();
-      const { verificationId } =
-        await this.firebaseAuthenticationService.signInWithPhoneNumber({
-          phoneNumber,
-        });
-      await loadingElement.dismiss();
-      const verificationCode = await this.showInputVerificationCodeAlert();
-      if (!verificationCode) {
-        return;
-      }
-      loadingElement = await this.dialogService.showLoading();
       await this.firebaseAuthenticationService.signInWithPhoneNumber({
-        verificationId,
-        verificationCode,
+        phoneNumber,
       });
-      await this.navigateToHome();
+      await loadingElement.dismiss();
     } finally {
       await loadingElement?.dismiss();
     }
