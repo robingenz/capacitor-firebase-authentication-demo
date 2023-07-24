@@ -15,7 +15,11 @@ export class LoginPage implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.firebaseAuthenticationService.checkRedirectResult();
+    this.firebaseAuthenticationService.getRedirectResult().then((result) => {
+      if (result?.user) {
+        this.navigateToHome();
+      }
+    });
     this.firebaseAuthenticationService.phoneVerificationCompleted$.subscribe(
       () => this.navigateToHome()
     );

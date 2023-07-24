@@ -81,11 +81,11 @@ export class FirebaseAuthenticationService {
     initializeApp(environment.firebase);
   }
 
-  public async checkRedirectResult(): Promise<void> {
+  public async getRedirectResult(): Promise<SignInResult | undefined> {
     if (Capacitor.isNativePlatform()) {
       return;
     }
-    await FirebaseAuthentication.getRedirectResult();
+    return FirebaseAuthentication.getRedirectResult();
   }
 
   public confirmVerificationCode(

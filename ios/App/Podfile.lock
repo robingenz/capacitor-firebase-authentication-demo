@@ -5,11 +5,11 @@ PODS:
   - AppAuth/Core (1.6.1)
   - AppAuth/ExternalUserAgent (1.6.1):
     - AppAuth/Core
-  - Capacitor (5.0.0-rc.1):
+  - Capacitor (5.0.0):
     - CapacitorCordova
-  - CapacitorApp (5.0.0-beta.1):
+  - CapacitorApp (5.0.0):
     - Capacitor
-  - CapacitorCordova (5.0.0-rc.1)
+  - CapacitorCordova (5.0.0)
   - CapacitorFirebaseAuthentication (5.0.0):
     - Capacitor
     - CapacitorFirebaseAuthentication/Lite (= 5.0.0)
@@ -26,9 +26,9 @@ PODS:
   - CapacitorFirebaseAuthentication/Lite (5.0.0):
     - Capacitor
     - FirebaseAuth (= 10.8.0)
-  - CapacitorHaptics (5.0.0-beta.1):
+  - CapacitorHaptics (5.0.0):
     - Capacitor
-  - CapacitorKeyboard (5.0.0-beta.1):
+  - CapacitorKeyboard (5.0.0):
     - Capacitor
   - FBAEMKit (16.0.1):
     - FBSDKCoreKit_Basics (= 16.0.1)
@@ -119,12 +119,12 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AppAuth: e48b432bb4ba88b10cb2bcc50d7f3af21e78b9c2
-  Capacitor: f3abcb0ad3731b3dbe06e4172cc3670aa653a4a1
-  CapacitorApp: 9bbb287cd157e0e644f8bd6b0e25874eb662095e
-  CapacitorCordova: 9e13faa4d3efe6e67f38473c154a4a65811faac7
+  Capacitor: b332cb737d447561e854039fb72195206685dce2
+  CapacitorApp: 16e189e0463976060ccf34868e3083858c977e2b
+  CapacitorCordova: 4ea17670ee562680988a7ce9db68dee5160fe564
   CapacitorFirebaseAuthentication: f2e3c2a7488b87078025855588670840f93a721e
-  CapacitorHaptics: f4a2364168f6eae1ab76989355cb7ad8db386c18
-  CapacitorKeyboard: 68e28b61f8a23bf37ec0fad9a0849b1272218bba
+  CapacitorHaptics: a7d1a6be8d84bcb2749bad57230a8b9e8cdcef7c
+  CapacitorKeyboard: 8a25a4241b74f69d457a7e81220a54c22214a679
   FBAEMKit: daac7466b918752f020345be5c7d9787f98cfc07
   FBSDKCoreKit: 2cb033464b2134af0138f87d20b859eb3f9be359
   FBSDKCoreKit_Basics: d37280da2e65872f0e931d15f45d97ea324fec37

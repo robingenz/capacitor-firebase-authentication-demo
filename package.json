@@ -21,7 +21,7 @@
     "@angular/platform-browser": "14.1.1",
     "@angular/platform-browser-dynamic": "14.1.1",
     "@angular/router": "14.1.1",
-    "@capacitor-firebase/authentication": "5.0.0",
+    "@capacitor-firebase/authentication": "5.1.0",
     "@capacitor/android": "5.0.0",
     "@capacitor/app": "5.0.0",
     "@capacitor/core": "5.0.0",
@@ -29,7 +29,7 @@
     "@capacitor/ios": "5.0.0",
     "@capacitor/keyboard": "5.0.0",
     "@ionic/angular": "6.2.1",
-    "firebase": "9.14.0",
+    "firebase": "10.1.0",
     "rxjs": "7.5.6",
     "tslib": "2.4.0",
     "zone.js": "0.11.7"
