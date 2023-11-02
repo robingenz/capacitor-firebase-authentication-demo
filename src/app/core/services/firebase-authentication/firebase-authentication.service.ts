@@ -1,9 +1,11 @@
 import { Injectable, NgZone } from '@angular/core';
 import {
+  ConfirmVerificationCodeOptions,
   FirebaseAuthentication,
   GetIdTokenOptions,
+  PhoneVerificationCompletedEvent,
+  SignInResult,
   SignInWithPhoneNumberOptions,
-  SignInWithPhoneNumberResult,
   User,
 } from '@capacitor-firebase/authentication';
 import { Capacitor } from '@capacitor/core';
@@ -11,21 +13,26 @@ import { environment } from '@env/environment';
 import { Platform } from '@ionic/angular';
 import { getApp, initializeApp } from 'firebase/app';
 import {
-  getAuth,
   GoogleAuthProvider,
+  OAuthProvider,
+  getAuth,
   indexedDBLocalPersistence,
   initializeAuth,
-  OAuthProvider,
   onAuthStateChanged,
   signInWithCredential,
 } from 'firebase/auth';
-import { lastValueFrom, Observable, ReplaySubject, take } from 'rxjs';
+import { Observable, ReplaySubject, Subject, lastValueFrom, take } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FirebaseAuthenticationService {
   private currentUserSubject = new ReplaySubject<User | null>(1);
+  private phoneVerificationCompletedSubject =
+    new Subject<PhoneVerificationCompletedEvent>();
+  private phoneCodeSentSubject = new Subject<{
+    verificationId: string;
+  }>();
 
   constructor(
     private readonly platform: Platform,
@@ -35,6 +42,19 @@ export class FirebaseAuthenticationService {
       FirebaseAuthentication.addListener('authStateChange', (change) => {
         this.ngZone.run(() => {
           this.currentUserSubject.next(change.user);
+        });
+      });
+      FirebaseAuthentication.addListener(
+        'phoneVerificationCompleted',
+        async (event) => {
+          this.ngZone.run(() => {
+            this.phoneVerificationCompletedSubject.next(event);
+          });
+        }
+      );
+      FirebaseAuthentication.addListener('phoneCodeSent', async (event) => {
+        this.ngZone.run(() => {
+          this.phoneCodeSentSubject.next(event);
         });
       });
     });
@@ -52,6 +72,16 @@ export class FirebaseAuthenticationService {
     return this.currentUserSubject.asObservable();
   }
 
+  public get phoneVerificationCompleted$(): Observable<PhoneVerificationCompletedEvent> {
+    return this.phoneVerificationCompletedSubject.asObservable();
+  }
+
+  public get phoneCodeSent$(): Observable<{
+    verificationId: string;
+  }> {
+    return this.phoneCodeSentSubject.asObservable();
+  }
+
   public async initialize(): Promise<void> {
     // if (this.platform.is('capacitor')) {
     //   return;
@@ -64,11 +94,17 @@ export class FirebaseAuthenticationService {
     // initializeApp(environment.firebase);
   }
 
-  public async checkRedirectResult(): Promise<void> {
+  public async getRedirectResult(): Promise<SignInResult | undefined> {
     if (Capacitor.isNativePlatform()) {
       return;
     }
-    await FirebaseAuthentication.getRedirectResult();
+    return FirebaseAuthentication.getRedirectResult();
+  }
+
+  public confirmVerificationCode(
+    options: ConfirmVerificationCodeOptions
+  ): Promise<SignInResult> {
+    return FirebaseAuthentication.confirmVerificationCode(options);
   }
 
   public getCurrentUser(): Promise<User | null> {
@@ -132,9 +168,9 @@ export class FirebaseAuthenticationService {
     await FirebaseAuthentication.signInWithYahoo();
   }
 
-  public async signInWithPhoneNumber(
+  public signInWithPhoneNumber(
     options: SignInWithPhoneNumberOptions
-  ): Promise<SignInWithPhoneNumberResult> {
+  ): Promise<void> {
     return FirebaseAuthentication.signInWithPhoneNumber(options);
   }
 
