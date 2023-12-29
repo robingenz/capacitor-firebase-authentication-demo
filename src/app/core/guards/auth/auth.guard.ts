@@ -5,10 +5,10 @@ import { FirebaseAuthenticationService } from '@app/core';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard  {
+export class AuthGuard {
   constructor(
     private readonly firebaseAuthenticationService: FirebaseAuthenticationService,
-    private readonly router: Router
+    private readonly router: Router,
   ) {}
 
   public async canActivate(): Promise<boolean> {

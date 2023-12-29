@@ -8,7 +8,7 @@ import { FirebaseAuthenticationService } from './core';
 })
 export class AppComponent {
   constructor(
-    private readonly firebaseAuthenticationService: FirebaseAuthenticationService
+    private readonly firebaseAuthenticationService: FirebaseAuthenticationService,
   ) {
     this.initializeApp();
   }

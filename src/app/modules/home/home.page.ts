@@ -16,7 +16,7 @@ export class HomePage implements OnInit {
   constructor(
     private readonly firebaseAuthenticationService: FirebaseAuthenticationService,
     private readonly dialogService: DialogService,
-    private readonly router: Router
+    private readonly router: Router,
   ) {}
 
   public ngOnInit(): void {

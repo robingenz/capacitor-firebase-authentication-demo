@@ -27,7 +27,7 @@ export class FirebaseAuthenticationService {
 
   constructor(
     private readonly platform: Platform,
-    private readonly ngZone: NgZone
+    private readonly ngZone: NgZone,
   ) {
     FirebaseAuthentication.removeAllListeners().then(() => {
       FirebaseAuthentication.addListener('authStateChange', (change) => {
@@ -41,7 +41,7 @@ export class FirebaseAuthenticationService {
           this.ngZone.run(() => {
             this.phoneVerificationCompletedSubject.next(event);
           });
-        }
+        },
       );
       FirebaseAuthentication.addListener('phoneCodeSent', async (event) => {
         this.ngZone.run(() => {
@@ -89,7 +89,7 @@ export class FirebaseAuthenticationService {
   }
 
   public confirmVerificationCode(
-    options: ConfirmVerificationCodeOptions
+    options: ConfirmVerificationCodeOptions,
   ): Promise<SignInResult> {
     return FirebaseAuthentication.confirmVerificationCode(options);
   }
@@ -142,7 +142,7 @@ export class FirebaseAuthenticationService {
   }
 
   public signInWithPhoneNumber(
-    options: SignInWithPhoneNumberOptions
+    options: SignInWithPhoneNumberOptions,
   ): Promise<void> {
     return FirebaseAuthentication.signInWithPhoneNumber(options);
   }

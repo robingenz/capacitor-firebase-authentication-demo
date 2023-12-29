@@ -11,7 +11,7 @@ export class LoginPage implements OnInit {
   constructor(
     private readonly firebaseAuthenticationService: FirebaseAuthenticationService,
     private readonly dialogService: DialogService,
-    private readonly router: Router
+    private readonly router: Router,
   ) {}
 
   public ngOnInit(): void {
@@ -21,7 +21,7 @@ export class LoginPage implements OnInit {
       }
     });
     this.firebaseAuthenticationService.phoneVerificationCompleted$.subscribe(
-      () => this.navigateToHome()
+      () => this.navigateToHome(),
     );
     this.firebaseAuthenticationService.phoneCodeSent$.subscribe(
       async (event) => {
@@ -40,7 +40,7 @@ export class LoginPage implements OnInit {
         } finally {
           await loadingElement?.dismiss();
         }
-      }
+      },
     );
   }
 

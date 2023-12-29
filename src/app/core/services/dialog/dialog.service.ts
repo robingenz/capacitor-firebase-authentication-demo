@@ -20,7 +20,7 @@ export class DialogService {
     private alertCtrl: AlertController,
     private modalCtrl: ModalController,
     private loadingCtrl: LoadingController,
-    private popoverCtrl: PopoverController
+    private popoverCtrl: PopoverController,
   ) {}
 
   public async showAlert(opts?: AlertOptions): Promise<HTMLIonAlertElement> {
@@ -30,7 +30,7 @@ export class DialogService {
   }
 
   public async showErrorAlert(
-    opts?: AlertOptions
+    opts?: AlertOptions,
   ): Promise<HTMLIonAlertElement> {
     const defaultOpts: AlertOptions = {
       header: 'Error',
@@ -73,7 +73,7 @@ export class DialogService {
   }
 
   public async showPopover(
-    opts: PopoverOptions
+    opts: PopoverOptions,
   ): Promise<HTMLIonPopoverElement> {
     const popover = await this.popoverCtrl.create(opts);
     await popover.present();
@@ -81,7 +81,7 @@ export class DialogService {
   }
 
   public async showLoading(
-    opts?: LoadingOptions
+    opts?: LoadingOptions,
   ): Promise<HTMLIonLoadingElement> {
     const defaultOpts: LoadingOptions = {
       message: 'Loading...',
