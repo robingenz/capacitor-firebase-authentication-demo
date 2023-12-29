@@ -10,7 +10,7 @@
       <ion-card-title>User Info</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <ng-container *ngIf="currentUser">
+      @if (currentUser) {
         <ion-item>
           <ion-label position="stacked">UID</ion-label>
           <ion-input [value]="currentUser.uid" readonly></ion-input>
@@ -54,31 +54,33 @@
           <ion-label position="stacked">ID Token</ion-label>
           <ion-input [value]="idToken" readonly></ion-input>
         </ion-item>
-      </ng-container>
+      }
       <ion-button expand="block" (click)="refreshCurrentUser()"
         >Refresh Current User</ion-button
-      >
-      <ion-button expand="block" (click)="refreshIdToken()"
-        >Refresh ID Token</ion-button
-      >
-      <ion-button expand="block" (click)="signOut()">Logout</ion-button>
-    </ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Configuration</ion-card-title>
-    </ion-card-header>
-    <ion-card-content *ngIf="currentUser">
-      <ion-item>
-        <ion-label position="stacked">Language</ion-label>
-        <ion-input [(ngModel)]="languageCode" placeholder="en-US"></ion-input>
-      </ion-item>
-      <ion-button expand="block" (click)="setLanguageCode(languageCode)"
-        >Set Language Code</ion-button
-      >
-      <ion-button expand="block" (click)="useAppLanguage()"
-        >Use App Language</ion-button
-      >
-    </ion-card-content>
-  </ion-card>
-</ion-content>
+        >
+        <ion-button expand="block" (click)="refreshIdToken()"
+          >Refresh ID Token</ion-button
+          >
+          <ion-button expand="block" (click)="signOut()">Logout</ion-button>
+        </ion-card-content>
+      </ion-card>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Configuration</ion-card-title>
+        </ion-card-header>
+        @if (currentUser) {
+          <ion-card-content>
+            <ion-item>
+              <ion-label position="stacked">Language</ion-label>
+              <ion-input [(ngModel)]="languageCode" placeholder="en-US"></ion-input>
+            </ion-item>
+            <ion-button expand="block" (click)="setLanguageCode(languageCode)"
+              >Set Language Code</ion-button
+              >
+              <ion-button expand="block" (click)="useAppLanguage()"
+                >Use App Language</ion-button
+                >
+              </ion-card-content>
+            }
+          </ion-card>
+        </ion-content>
