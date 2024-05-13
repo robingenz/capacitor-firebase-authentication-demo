@@ -23,5 +23,12 @@
 			]
 		}
 	},
-	"cordova": {}
+	"cordova": {},
+	"packageClassList": [
+		"FirebaseAuthenticationPlugin",
+		"FirebaseAuthenticationPlugin",
+		"AppPlugin",
+		"HapticsPlugin",
+		"KeyboardPlugin"
+	]
 }

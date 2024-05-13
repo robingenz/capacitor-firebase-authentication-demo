@@ -5,30 +5,30 @@ PODS:
   - AppAuth/Core (1.6.1)
   - AppAuth/ExternalUserAgent (1.6.1):
     - AppAuth/Core
-  - Capacitor (5.0.0):
+  - Capacitor (6.0.0):
     - CapacitorCordova
-  - CapacitorApp (5.0.0):
+  - CapacitorApp (6.0.0):
     - Capacitor
-  - CapacitorCordova (5.0.0)
-  - CapacitorFirebaseAuthentication (5.2.0):
+  - CapacitorCordova (6.0.0)
+  - CapacitorFirebaseAuthentication (6.0.0-dev.80d9693.1715591909):
     - Capacitor
-    - CapacitorFirebaseAuthentication/Lite (= 5.2.0)
-    - FirebaseAuth (= 10.8.0)
-  - CapacitorFirebaseAuthentication/Facebook (5.2.0):
+    - CapacitorFirebaseAuthentication/Lite (= 6.0.0-dev.80d9693.1715591909)
+    - FirebaseAuth (~> 10.24)
+  - CapacitorFirebaseAuthentication/Facebook (6.0.0-dev.80d9693.1715591909):
     - Capacitor
     - FBSDKCoreKit (= 16.0.1)
     - FBSDKLoginKit (= 16.0.1)
-    - FirebaseAuth (= 10.8.0)
-  - CapacitorFirebaseAuthentication/Google (5.2.0):
+    - FirebaseAuth (~> 10.24)
+  - CapacitorFirebaseAuthentication/Google (6.0.0-dev.80d9693.1715591909):
     - Capacitor
-    - FirebaseAuth (= 10.8.0)
+    - FirebaseAuth (~> 10.24)
     - GoogleSignIn (= 7.0.0)
-  - CapacitorFirebaseAuthentication/Lite (5.2.0):
+  - CapacitorFirebaseAuthentication/Lite (6.0.0-dev.80d9693.1715591909):
     - Capacitor
-    - FirebaseAuth (= 10.8.0)
-  - CapacitorHaptics (5.0.0):
+    - FirebaseAuth (~> 10.24)
+  - CapacitorHaptics (6.0.0):
     - Capacitor
-  - CapacitorKeyboard (5.0.0):
+  - CapacitorKeyboard (6.0.0):
     - Capacitor
   - FBAEMKit (16.0.1):
     - FBSDKCoreKit_Basics (= 16.0.1)
@@ -38,43 +38,52 @@ PODS:
   - FBSDKCoreKit_Basics (16.0.1)
   - FBSDKLoginKit (16.0.1):
     - FBSDKCoreKit (= 16.0.1)
-  - FirebaseAppCheckInterop (10.9.0)
-  - FirebaseAuth (10.8.0):
-    - FirebaseAppCheckInterop (~> 10.0)
+  - FirebaseAppCheckInterop (10.25.0)
+  - FirebaseAuth (10.25.0):
+    - FirebaseAppCheckInterop (~> 10.17)
     - FirebaseCore (~> 10.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
     - GoogleUtilities/Environment (~> 7.8)
     - GTMSessionFetcher/Core (< 4.0, >= 2.1)
-  - FirebaseCore (10.9.0):
+    - RecaptchaInterop (~> 100.0)
+  - FirebaseCore (10.25.0):
     - FirebaseCoreInternal (~> 10.0)
-    - GoogleUtilities/Environment (~> 7.8)
-    - GoogleUtilities/Logger (~> 7.8)
-  - FirebaseCoreInternal (10.9.0):
+    - GoogleUtilities/Environment (~> 7.12)
+    - GoogleUtilities/Logger (~> 7.12)
+  - FirebaseCoreInternal (10.25.0):
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
   - GoogleSignIn (7.0.0):
     - AppAuth (~> 1.5)
     - GTMAppAuth (< 3.0, >= 1.3)
     - GTMSessionFetcher/Core (< 4.0, >= 1.1)
-  - GoogleUtilities/AppDelegateSwizzler (7.11.1):
+  - GoogleUtilities/AppDelegateSwizzler (7.13.3):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
     - GoogleUtilities/Network
-  - GoogleUtilities/Environment (7.11.1):
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Environment (7.13.3):
+    - GoogleUtilities/Privacy
     - PromisesObjC (< 3.0, >= 1.2)
-  - GoogleUtilities/Logger (7.11.1):
+  - GoogleUtilities/Logger (7.13.3):
     - GoogleUtilities/Environment
-  - GoogleUtilities/Network (7.11.1):
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Network (7.13.3):
     - GoogleUtilities/Logger
     - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Privacy
     - GoogleUtilities/Reachability
-  - "GoogleUtilities/NSData+zlib (7.11.1)"
-  - GoogleUtilities/Reachability (7.11.1):
+  - "GoogleUtilities/NSData+zlib (7.13.3)":
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Privacy (7.13.3)
+  - GoogleUtilities/Reachability (7.13.3):
     - GoogleUtilities/Logger
+    - GoogleUtilities/Privacy
   - GTMAppAuth (2.0.0):
     - AppAuth/Core (~> 1.6)
     - GTMSessionFetcher/Core (< 4.0, >= 1.5)
   - GTMSessionFetcher/Core (3.1.1)
-  - PromisesObjC (2.2.0)
+  - PromisesObjC (2.4.0)
+  - RecaptchaInterop (100.0.0)
 
 DEPENDENCIES:
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
@@ -102,6 +111,7 @@ SPEC REPOS:
     - GTMAppAuth
     - GTMSessionFetcher
     - PromisesObjC
+    - RecaptchaInterop
 
 EXTERNAL SOURCES:
   Capacitor:
@@ -119,26 +129,27 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AppAuth: e48b432bb4ba88b10cb2bcc50d7f3af21e78b9c2
-  Capacitor: b332cb737d447561e854039fb72195206685dce2
-  CapacitorApp: 16e189e0463976060ccf34868e3083858c977e2b
-  CapacitorCordova: 4ea17670ee562680988a7ce9db68dee5160fe564
-  CapacitorFirebaseAuthentication: 1278b10587edcf1adba0d136d367e024e9c38400
-  CapacitorHaptics: a7d1a6be8d84bcb2749bad57230a8b9e8cdcef7c
-  CapacitorKeyboard: 8a25a4241b74f69d457a7e81220a54c22214a679
+  Capacitor: 559d073c4ca6c27f8e7002c807eea94c3ba435a9
+  CapacitorApp: 9d53aec7101f7b030a950c5bdc4df8612576b279
+  CapacitorCordova: 8c4bfdf69368512e85b1d8b724dd7546abeb30af
+  CapacitorFirebaseAuthentication: 28503af80734083c97f2ec4de985c6a43ea73fff
+  CapacitorHaptics: 9ebc9363f0e9b8eb4295088a0b474530acf1859b
+  CapacitorKeyboard: deacbd09d8d1029c3681197fb05d206b721d5f73
   FBAEMKit: daac7466b918752f020345be5c7d9787f98cfc07
   FBSDKCoreKit: 2cb033464b2134af0138f87d20b859eb3f9be359
   FBSDKCoreKit_Basics: d37280da2e65872f0e931d15f45d97ea324fec37
   FBSDKLoginKit: c47a3b90920702487b10b647c63520dc2676dad9
-  FirebaseAppCheckInterop: e69dde5cd51b88ee1b4339d6766b691272256f9b
-  FirebaseAuth: 28e6fff787467cd15ab51c8c7aa904003b2f57aa
-  FirebaseCore: b68d3616526ec02e4d155166bbafb8eca64af557
-  FirebaseCoreInternal: d2b4acb827908e72eca47a9fd896767c3053921e
+  FirebaseAppCheckInterop: 5da5ce93e8797a215e3f677fb0654b74e736c8b8
+  FirebaseAuth: c0f93dcc570c9da2bffb576969d793e95c344fbb
+  FirebaseCore: 7ec4d0484817f12c3373955bc87762d96842d483
+  FirebaseCoreInternal: 910a81992c33715fec9263ca7381d59ab3a750b7
   GoogleSignIn: b232380cf495a429b8095d3178a8d5855b42e842
-  GoogleUtilities: 9aa0ad5a7bc171f8bae016300bfcfa3fb8425749
+  GoogleUtilities: ea963c370a38a8069cc5f7ba4ca849a60b6d7d15
   GTMAppAuth: 99fb010047ba3973b7026e45393f51f27ab965ae
   GTMSessionFetcher: e8647203b65cee28c5f73d0f473d096653945e72
-  PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
+  PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
+  RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
 
 PODFILE CHECKSUM: ce283c1f73fe4d768294c2e8bb147c8d41a6e6d6
 
-COCOAPODS: 1.13.0
+COCOAPODS: 1.15.2

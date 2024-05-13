@@ -6,7 +6,7 @@ keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 android {
     namespace "dev.robingenz.capacitor.firebaseauth.demo"
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    compileSdk rootProject.ext.compileSdkVersion
     defaultConfig {
         applicationId "dev.robingenz.capacitor.firebaseauth.demo"
         minSdkVersion rootProject.ext.minSdkVersion
