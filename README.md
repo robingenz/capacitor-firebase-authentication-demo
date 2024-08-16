@@ -40,6 +40,62 @@ Install all dependencies:
 npm i
 ```
 
+### Configure Firebase
+
+To run your own instance of the demo, you will need to create your own instance of a Firebase project and configure Firebase (see [here](https://github.com/capawesome-team/capacitor-firebase/blob/main/docs/firebase-setup.md)). You will need to ensure that each of the desired sign-in methods are enabled.
+
+### Android Keystore
+
+Android requires a keystore to sign the app.
+
+#### Shell Command
+
+You can create a debug keystore with the following command:
+
+```shell
+echo -n "Enter keystore password (minimum 6 characters): " >&2
+read -s password
+echo >&2
+
+keytool -genkey -v \
+    -keystore android/debug.keystore \
+    -storepass "$password" \
+    -alias debug \
+    -keypass "$password" \
+    -keyalg RSA \
+    -keysize 2048 \
+    -validity 10000 \
+    -dname "CN=Unknown, OU=Unknown, O=Unknown, L=Unknown, ST=Unknown, C=Unknown" \
+    -noprompt &&
+echo "storePassword=$password" > android/keystore.properties &&
+echo "keyPassword=$password" >> android/keystore.properties &&
+echo "keyAlias=debug" >> android/keystore.properties &&
+echo "storeFile=debug.keystore" >> android/keystore.properties
+
+```
+
+#### Alternative Manual Method
+
+Alternatively, you can create a keystore and `android/keystore.properties` keystore through another means (see [Android docs](https://developer.android.com/studio/publish/app-signing#generate-key)). Create a new file under the following path: `android/keystore.properties`. This file should have the following content:
+
+```kotlin
+storePassword=<store-password>
+keyPassword=<key-password>
+keyAlias=<key-alias>
+storeFile=<store-file-path>
+```
+
+Of course you have to replace the placeholders, e.g.
+
+```kotlin
+storePassword=1234
+keyPassword=1234
+keyAlias=debug
+storeFile=debug.keystore
+```
+
+### Prepare and Launch
+
 Prepare and launch the Android app:
 
 ```
