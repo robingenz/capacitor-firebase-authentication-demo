@@ -122,6 +122,7 @@ export class FirebaseAuthenticationService {
   public async signInWithGoogle(): Promise<void> {
     await FirebaseAuthentication.signInWithGoogle({
       mode: 'redirect',
+      scopes: ['https://www.googleapis.com/auth/userinfo.email'],
     });
   }
 
